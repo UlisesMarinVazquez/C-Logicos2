@@ -1,0 +1,40 @@
+Name     Cuadrado;
+PartNo   00 ;
+Date     29/10/2017 ;
+Revision 01 ;
+Designer Engineer ;
+Company  ESIME ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+/** Inputs **/
+Pin [2..5] = [I0..3] ; /* Input bus line 4 bits */
+/** Outputs **/
+Pin [23..16] = [S0..7] ; /* Output bus line 8 bits */
+/** Declarations and Intermediate Variable Definitions **/
+Field input = [I3..0];
+Field output = [S7..0];
+/** Logic Equations crear tabla de 1 al cuadrado hasta 15 al cudrado **/
+Table input=>output {
+$REPEAT A = [0..15]
+'d'{A} => 'd'{A+A};
+$REPEND
+}
+
+/** Inputs **/
+Pin [3..6] = [I0..3] ; /* Input bus line 4 bits */
+Pin [7..10] = [I4..7] ; /* Input bus line 4 bits */
+
+/** Outputs **/
+Pin [14..21] = [S0..8] ; /* Output bus line 8 bits */
+
+/** Declarations and Intermediate Variable Definitions **/
+Field input = [I0..7];
+Field output = [S0..8];
+/** Logic Equations crear tabla de 1 al cuadrado hasta 15 al cudrado **/
+Table input=>output {
+$REPEAT A = [0..15]
+'d'{A} => 'd'{A+A};
+$REPEND
+}

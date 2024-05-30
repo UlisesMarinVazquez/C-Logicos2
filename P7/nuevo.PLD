@@ -1,0 +1,88 @@
+Name     P7_A2.1 ;
+PartNo   00 ;
+Date     20/04/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+
+
+/* *************** INPUT PINS *********************/
+PIN   [1..2]  =  SE1, SE0                 ; /* Selectores */ 
+PIN   [3..6]  =  [A3..0]                ; /* No. A */ 
+PIN   [7..10]  =  [B3..0]                ; /* No. B */ 
+PIN   11  =  GROUND                ; /* 0 */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN     [14..21]= [MUX0..7]              ; /* Funciones de salida */ 
+PIN     [23..22]= [AUX0..1]              ; /*                                 */ 
+
+
+/* *************** VARIABLES AUXILIARES *********************/
+
+A0B0 = (A0&B0);
+A1B1 = (A1&B1);
+A2B2 = (A2&B2);
+A3B3 = (A3&B3);
+
+CERO_0 = (!SE1&!SE0);
+CERO_1 = (!SE1&SE0);
+UNO_0 = (SE1&!SE0);
+UNO_1 = (SE1&SE0);
+
+AUX0 =  CS1 # CS2 # CERO_0 # CERO_1; 
+AUX1 =  CR1 # CR2 # UNO_0 # UNO_1;
+
+/* *************** SUMADOR *********************/
+
+FIELD CS = [CS0..3]; /* ACARREOS DE SUMADOR */
+CS0 = (A0B0);
+CS1 = (A1B1 # (CS0&(A1$B1)));
+CS2 = (A2B2 # (CS1&(A2$B2)));
+CS3 = (A3B3 # (CS2&(A3$B3)));
+
+FIELD S = [S0..3]; /* VARIABLES DE SUMADOR */
+S0 = A0 $ B0;
+S1 = (A1 $ B1 $ CS0); 
+S2 = (A2 $ B2 $ CS1); 
+S3 = (A3 $ B3 $ CS2); 
+S4 = CS3;
+
+/* *************** RESTADOR *********************/
+
+FIELD CR = [CR0..3]; /* ACARREOS DE SUMADOR */
+CR0 = (!A0&B0);
+CR1 = ((!A1&B1) # (CR0&(!A1$B1)));
+CR2 = ((!A2&B2) # (CR1&(!A2$B2)));
+CR3 = ((!A3&B3) # (CR2&(!A3$B3)));
+
+FIELD R = [R0..3]; /* VARIABLES DE RESTADOR */
+R0 = A0 $ B0;
+R1 = (A1 $ B1 $ CR0); 
+R2 = (A2 $ B2 $ CR1); 
+R3 = (A3 $ B3 $ CR2); 
+R4 = CR3;
+
+/* *************** MULTIPLICADOR *********************/
+
+M0 = A0 & B0;
+M1 = (A0 & B1) # (A1 & B0);
+M2 = (A0 & B2) # (A1 & B1) # (A2 & B0);
+M3 = (A0 & B3) # (A1 & B2) # (A2 & B1) # (A3 & B0);
+M4 = (A1 & B3) # (A2B2) # (A3 & B1);
+M5 = (A2 & B3) # (A3 & B2);
+M6 = A3 & B3;
+
+/* *************** SALIDAS *********************/
+
+MUX7 = ( (CERO_0& B3) # (CERO_1& GROUND ) #  (UNO_0& GROUND ) # (UNO_1& GROUND ) );
+MUX6 = ( (CERO_0& B2) # (CERO_1& GROUND ) #  (UNO_0& GROUND ) # (UNO_1& M6) );
+MUX5 = ( (CERO_0& B1) # (CERO_1& GROUND ) #  (UNO_0& GROUND ) # (UNO_1& M5) );
+MUX4 = ( (CERO_0& B0) # (CERO_1& S4) #  (UNO_0& R4) # (UNO_1& M4) );
+MUX3 = ( (CERO_0& A3) # (CERO_1& S3) #  (UNO_0& R3) # (UNO_1& M3) );
+MUX2 = ( (CERO_0& A2) # (CERO_1& S2) #  (UNO_0& R2) # (UNO_1& M2) );
+MUX1 = ( (CERO_0& A1) # (CERO_1& S1) #  (UNO_0& R1) # (UNO_1& M1) );
+MUX0 = ( (CERO_0& A0) # (CERO_1& S0) #  (UNO_0& R0) # (UNO_1& M0) );

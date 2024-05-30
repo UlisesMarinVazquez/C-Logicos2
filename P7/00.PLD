@@ -1,0 +1,19 @@
+/*CAMPOS*/
+FIELD X=[X3..0]; /*XOR*/
+X0=A3$CIN;
+X1=A2$CIN;
+X2=A1$CIN;
+X3=A0$CIN;
+
+
+S3=X0$B3$CIN;
+C4= CIN& B3 # CIN & X0 # B3 & X0;
+
+S2=X1$B2$C4;
+C3= C4& B2 # C4 & X1 # B2 & X1;
+
+S1=X2$B2$C3;
+C2= C3& B1 # C3 & X2 # B1 & X2;
+
+S0=X3$B0$C0;
+C1= C0& B0 # C0 & X3 # B0 & X3;

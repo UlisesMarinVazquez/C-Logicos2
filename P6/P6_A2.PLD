@@ -1,0 +1,33 @@
+Name     P6_R ;
+PartNo   00 ;
+Date     19/04/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+/* *************** INPUT PINS *********************/
+PIN [2..5] = M,A,R,I;
+PIN [6..9] = G,O,N,Z;
+/* *************** OUTPUT PINS *********************/
+PIN 19 = U;
+PIN 18 = L;
+
+
+/* *************** INPUT PINS *********************/
+PIN [2..5] = [M..3];
+PIN [6..9] = [G..3];
+/* *************** OUTPUT PINS *********************/
+PIN 19 = S0;
+PIN 18 = S1;
+
+Y3 = !(I $ Z);
+Y2 = !(R $ N);
+Y1 = !(A $ O);
+Y0 = !(M $ G);
+S1 = !(!I&Z # Y3&!R&N # Y3&Y2&!A&O # Y3&Y2&Y1&!M&G);
+S0 = !(I&!Z # Y3&R&!N # Y3&Y2&A&!O # Y3&Y2&Y1&M&!G);
+
+

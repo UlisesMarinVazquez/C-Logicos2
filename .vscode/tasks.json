@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe build active file",
+            "command": "C:/TDM-GCC-64/bin/gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}//${fileBasenameNoExtension}.exe",
+                ""
+            ],
+            "options": {
+                "cwd": "C:/TDM-GCC-64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: C:/TDM-GCC-64/bin/gcc.exe"
+        },
+        {
+            "label": "cupl",
+            "type": "shell",
+            // Add 's' to this jumble of flags if you're using the simulator.
+            "command": "cupl.exe -m1lxfjnabe -u C:/WinCUPL/Shared/Atmel.DL C:/Users/ulise/Documentos/C-Logicos2/Pruebas/00.PLD",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

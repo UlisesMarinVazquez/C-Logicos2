@@ -1,0 +1,61 @@
+Name     P6-A1 ;
+PartNo   00 ;
+Date     19/04/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+/* *************** INPUT PINS *********************/
+PIN   [2..7]  =  M,A,R,G,O,N                  ; /*                                 */ 
+
+
+/* *************** OUTPUT PINS *********************/
+PIN     [14..17]= [SA_1..4]; /*                                 */ 
+PIN     [20..21]= [SA_7..8]; /*                                 */ 
+
+/* VARIABLES AUXILIARES DE GRAY */
+
+G3 = (!M&!A&R); 
+G2 = ((!M&!A&!R&G)#(!M&!A&R&!G));
+G1 = ((!M&!A&!G&O)#(!M&!A&G&!O));
+G0 = ((!M&!A&!O&N)#(!M&!A&O&!N));
+
+/* VARIABLES AUXILIARES DE EXCESO 3*/
+
+E6 =((!M&A&R&O)#(!M&A&R&G));
+E3 =((!M&A&!R&G&N)#(!M&A&!R&G&O)#(!M&A&R&!G&!O)#(!M&A&R&O&N));
+E2 =((!M&A&!G&N)#(!M&A&!R&!G&O)#(!M&A&G&!O&!N)#(!M&A&R&G&!N)#(!M&A&R&!O&N));
+E1 =((!M&A&!R&O&N)#(!M&A&!R&!O&!N)#(!M&A&R&G&!O&N)#(!M&A&R&O&!N)#(!M&A&R&!G&!N));
+E0 =((!M&A&!N));
+
+
+/* VARIABLES AUXILIARES DE BCD */
+
+D3 =(M&!A&R&!G&!O);
+D2 =(M&!A&!R&G);
+D1 =(M&!A&!R&O);
+D0 =(M&!A&!R&N)#(M&!A&!G&!O&N);
+W2 =(M&!A&R&O)#(M&!A&R&G);
+
+/* VARIABLES AUXILIARES DE OCTAL */
+
+
+O4 = M&A&R;
+O3 = M&A&G;
+O2 = M&A&O;
+O1 = M&A&N;
+
+
+/* FUNCIONES DE SALIDA */
+
+ SA_8 = (W2);
+ SA_7 = (E6);
+ SA_4 = (G3#E3#D3#O4);
+ SA_3 = (G2#E2#D2#O3);
+ SA_2 = (G1#E1#D1#O2);
+ SA_1 = (G0#E0#D0#O1);
+
+

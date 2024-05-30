@@ -1,0 +1,28 @@
+Name     PROGW8 ;
+PartNo   00 ;
+Date     17/9/2021 ;
+Revision 01 ;
+Designer Engineer ;
+Company  ChunchuMaru ;
+Assembly None ;
+Location  ;
+Device   g16v8 ;
+
+/* *************** INPUT PINS *********************/
+PIN    2 =  A                       ; /*                                 */ 
+PIN    [3..5] =[S_2..0]                         ; /*                                 */ 
+PIN     6 =  e                       ; /*                                 */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN   [12..19]  =[F_0..7]                         ; /*                                 */ 
+
+
+field  n = [S_0..2];
+F_0=A&(n:0)&e;
+F_1=A&(n:1)&e;
+F_2=A&(n:2)&e;
+F_3=A&(n:3)&e;
+F_4=A&(n:4)&e;
+F_5=A&(n:5)&e;
+F_6=A&(n:6)&e;
+F_7=A&(n:7)&e;
