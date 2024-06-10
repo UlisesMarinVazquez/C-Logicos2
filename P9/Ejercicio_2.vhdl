@@ -16,3 +16,14 @@ begin
     X3 <= (E xor F) and (C and D);
     X4 <= (E xor F) xnor ((E xor F) and (C and D));
 end eq_booleanas;
+
+NET "A" LOC = "N3"; 
+NET "B" LOC = "E2"; 
+NET "C" LOC = "F3"; 
+NET "D" LOC = "G3"; 
+NET "E" LOC = "B4"; 
+NET "F" LOC = "K3"; 
+NET "X1" LOC = "G1"; 
+NET "X2" LOC = "P4"; 
+NET "X3" LOC = "N4"; 
+NET "X4" LOC = "N5";
