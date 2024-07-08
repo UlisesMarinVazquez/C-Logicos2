@@ -1,0 +1,64 @@
+Name     P7_A2.1 ;
+PartNo   00 ;
+Date     20/04/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+
+
+/* *************** INPUT PINS *********************/
+PIN   [1..2]  =  SE1, SE0                 ; /* Selectores */ 
+PIN   [3..6]  =  [A3..0]                ; /* No. A */ 
+PIN   [7..10]  =  [B3..0]                ; /* No. B */ 
+
+
+/* *************** OUTPUT PINS *********************/
+PIN     [14..18]= [MUX0..4]              ; /* Funciones de salida */ 
+PIN     [19..23]= [AUX0..4]              ; /*                                 */ 
+
+
+/* *************** VARIABLES AUXILIARES *********************/
+
+A0B0 = (A0&B0);
+A1B1 = (A1&B1);
+A2B2 = (A2&B2);
+A3B3 = (A3&B3);
+
+/* *************** VARIABLES CARGADAS *********************/
+
+CERO_1 = (!SE1&SE0);
+
+AUX0 =  CS1 ;
+AUX1 =  CS2 ;
+AUX2 = (CS0&(A1$B1));
+AUX3 = A2 $ B2;
+AUX4 = A3 $ B3;
+
+
+
+/* *************** SUMADOR *********************/
+
+FIELD CS = [CS0..3]; /* ACARREOS DE SUMADOR */
+CS0 = (A0B0);
+CS1 = (A1B1 # AUX2);
+CS2 = (A2B2 # (CS1&(A2$B2)));
+CS3 = (A3B3 # (CS2&(A3$B3)));
+
+FIELD S = [S0..3]; /* VARIABLES DE SUMADOR */
+S0 = A0 $ B0;
+S1 = (A1 $ B1 $ CS0); 
+S2 = (AUX3 $ CS1); 
+S3 = (AUX4 $ CS2); 
+S4 = CS3;
+
+
+
+MUX4 = ( CERO_1& S4       );
+MUX3 = ( CERO_1& S3       );
+MUX2 = ( CERO_1& S2       );
+MUX1 = ( CERO_1& S1      );
+MUX0 = ( CERO_1& S0       );

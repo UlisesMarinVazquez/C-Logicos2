@@ -1,0 +1,81 @@
+
+Name     P8_1 ;
+PartNo   00 ;
+Date     23/04/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   g22v10 ;
+
+/* *************** INPUT PINS *********************/
+PIN    1 = CLK                        ; /*                                 */ 
+PIN    11 = !UA                       ; /*                                 */ 
+
+
+/* *************** OUTPUT PINS *********************/
+PIN	23= QA ; 
+PIN	22= QB;
+PIN	21= QC;
+PIN	20= QD;
+PIN	19= QE;
+
+
+
+
+$DEFINE s0 'B'00000
+$DEFINE s1 'B'00001
+$DEFINE s2 'B'00010
+$DEFINE s3 'B'00011
+$DEFINE s4 'B'00100
+$DEFINE s5 'B'00101
+$DEFINE s6 'B'00110
+$DEFINE s7 'B'00111
+$DEFINE s8 'B'01000
+$DEFINE s9 'B'01001
+$DEFINE s10 'B'10000
+$DEFINE s11 'B'10001
+$DEFINE s12 'B'10010
+$DEFINE s13 'B'10011
+$DEFINE s14 'B'10100
+$DEFINE s15 'B'10101
+
+FIELD contador = [QE,QD,QC,QB,QA];
+
+SEQUENCED contador 
+{
+PRESENT s0
+   NEXT s1;
+
+PRESENT s1
+   NEXT s2;
+
+PRESENT s2
+   NEXT s3;
+
+PRESENT s3
+   NEXT s4;
+
+PRESENT s4
+   NEXT s5;
+
+PRESENT s5
+   NEXT s6;
+
+PRESENT s6
+   NEXT s7;
+
+PRESENT s7
+   NEXT s8;
+
+PRESENT s8
+   NEXT s9;
+
+PRESENT s9
+   NEXT s0;
+}
+		
+
+
+

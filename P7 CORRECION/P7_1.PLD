@@ -1,0 +1,32 @@
+Name     P7_A1 ;
+PartNo   00 ;
+Date     20/04/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+/* *************** INPUT PINS *********************/
+PIN [2..7] = A,B,C,D,E,F;
+
+/* *************** OUTPUT PINS *********************/
+PIN [14..17] = X4,X3,X2,X1;
+
+
+/* VARIABLES AUXILIARES */
+
+AUX1 = !(A$B);
+AUX2 = (C&D);
+AUX3 = !(E$F);
+AUX4 = (AUX1#AUX2);
+AUX5 = (AUX2&AUX3);
+
+/* SALIDAS DE FUNCIONES */
+
+X1 = (AUX1);
+X2 = !(AUX4&AUX5);
+X3 = (AUX5);
+X4 = !(X3$AUX3);
+

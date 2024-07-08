@@ -1,0 +1,35 @@
+Name     ENTRADAS ;
+PartNo   00 ;
+Date     23/06/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   G22V10 ;
+
+/* *************** INPUT PINS *********************/
+PIN   [1..2]  =  SE1, SE0                 ; /* Selectores */ 
+PIN   [3..6]  =  [C3..0]                ; /* No. A */ 
+PIN   [7..10]  =  [D3..0]                ; /* No. B */ 
+
+
+/* *************** OUTPUT PINS *********************/
+PIN     [14..21]= [MUX0..7]              ; /* Funciones de salida */ 
+
+
+
+/* *************** VARIABLES CARGADAS *********************/
+
+CERO_0 = (!SE1 & !SE0);
+
+
+MUX7 = (CERO_0 # C3);
+MUX6 = (CERO_0 # C2);
+MUX5 = (CERO_0 # C1);
+MUX4 = (CERO_0 # C0);
+
+MUX3 = (CERO_0 # D3);
+MUX2 = (CERO_0 # D2);
+MUX1 = (CERO_0 # D1);
+MUX0 = (CERO_0 # D0);

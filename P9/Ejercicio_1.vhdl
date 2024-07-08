@@ -11,7 +11,7 @@ end circuito_combinacional;
 architecture eq_booleanas of circuito_combinacional is
 begin
 
-    F <= ((A or B) or (C xnor A))nor (B and C);
+    F <= ((A or B) or (C xnor A)) nor (B and C);
 
 end eq_booleanas;
 

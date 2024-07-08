@@ -12,15 +12,15 @@ Device   G22V10 ;
 
 /* *************** INPUT PINS *********************/
 PIN   [1..2]  =  SE1, SE0                 ; /* Selectores */ 
-PIN   [3..10]  =  [A8..0]                ; /* No. A y B */ 
+PIN   [3..10]  =  [A7..0]                ; /* No. A y B */ 
 
 
 /* *************** OUTPUT PINS *********************/
-PIN     [14..21]= [M0..7]              ; /* Funciones de salida */ 
+PIN     [14..21]= [AUX0..7]              ; /* Funciones de salida */ 
 
 /* *************** FUNCIONES DE SALIDA *********************/
 
-TABLE [A8..0] => [M0..7]{
+TABLE [A7..0] => [M0..7]{
 
    /* Tabla de multiplicar del 0 */
 
@@ -153,3 +153,13 @@ TABLE [A8..0] => [M0..7]{
 'h' 99 => 'b' 01010001;
 
 }
+
+/* *************** SALIDAS FINALES *********************/
+AUX0 = UNO_1 & M0;
+AUX1 = UNO_1 & M1;
+AUX2 = UNO_1 & M2;
+AUX3 = UNO_1 & M3;
+AUX4 = UNO_1 & M4;
+AUX5 = UNO_1 & M5;
+AUX6 = UNO_1 & M6;
+AUX7 = UNO_1 & M7;

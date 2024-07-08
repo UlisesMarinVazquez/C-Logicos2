@@ -1,0 +1,75 @@
+Name     Name ;
+PartNo   00 ;
+Date     08/07/2024 ;
+Revision 01 ;
+Designer Engineer ;
+Company  IPN ;
+Assembly None ;
+Location  ;
+Device   g22v10 ;
+
+
+
+/* Define Input Pins */
+Pin 1..10 = Digits;   /* Input pins for the 10 digits */
+
+/* Define Output Pins */
+Pin 21 = SegA;
+Pin 22 = SegB;
+Pin 23 = SegC;
+Pin 24 = SegD;
+Pin 25 = SegE;
+Pin 26 = SegF;
+Pin 27 = SegG;
+Pin 28 = DP;          /* Decimal Point */
+Pin 14 = Disp1;       /* Display 1 select */
+Pin 15 = Disp2;       /* Display 2 select */
+Pin 16 = Disp3;       /* Display 3 select */
+Pin 17 = Disp4;       /* Display 4 select */
+
+/* Define Intermediate Variables */
+Field DigitSelect = [Disp1..Disp4];   /* Display select field */
+
+/* Segment definitions for numbers 0-9 */
+SegMap[0] = 0b0111111;   /* 0 */
+SegMap[1] = 0b0000110;   /* 1 */
+SegMap[2] = 0b1011011;   /* 2 */
+SegMap[3] = 0b1001111;   /* 3 */
+SegMap[4] = 0b1100110;   /* 4 */
+SegMap[5] = 0b1101101;   /* 5 */
+SegMap[6] = 0b1111101;   /* 6 */
+SegMap[7] = 0b0000111;   /* 7 */
+SegMap[8] = 0b1111111;   /* 8 */
+SegMap[9] = 0b1101111;   /* 9 */
+
+/* Main logic */
+equations
+    /* Initialize displays to off */
+    !Disp1 = 1;
+    !Disp2 = 1;
+    !Disp3 = 1;
+    !Disp4 = 1;
+
+    /* Scan and multiplex displays */
+    if (DigitSelect == 0b0001) then {
+        /* Display 1 */
+        [SegA..SegG] = SegMap[Digits[0]];
+        !Disp1 = 0;
+    }
+    else if (DigitSelect == 0b0010) then {
+        /* Display 2 */
+        [SegA..SegG] = SegMap[Digits[1]];
+        !Disp2 = 0;
+    }
+    else if (DigitSelect == 0b0100) then {
+        /* Display 3 */
+        [SegA..SegG] = SegMap[Digits[2]];
+        !Disp3 = 0;
+    }
+    else if (DigitSelect == 0b1000) then {
+        /* Display 4 */
+        [SegA..SegG] = SegMap[Digits[3]];
+        !Disp4 = 0;
+    }
+
+    /* Continue for the remaining digits if needed... */
